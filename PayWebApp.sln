@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayWebApp", "PayWebApp\PayW
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5C4B50B0-52BB-4AC7-B5A6-D67685B3E1C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentBLL", "PaymentBLL\PaymentBLL.csproj", "{6962CDFB-1505-4D95-BC5F-09577BF6B863}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5C4B50B0-52BB-4AC7-B5A6-D67685B3E1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C4B50B0-52BB-4AC7-B5A6-D67685B3E1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C4B50B0-52BB-4AC7-B5A6-D67685B3E1C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6962CDFB-1505-4D95-BC5F-09577BF6B863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6962CDFB-1505-4D95-BC5F-09577BF6B863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6962CDFB-1505-4D95-BC5F-09577BF6B863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6962CDFB-1505-4D95-BC5F-09577BF6B863}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
