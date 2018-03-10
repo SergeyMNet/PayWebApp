@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  paywebapp:
+    image: paywebapp
+    build:
+      context: ./PayWebApp
+      dockerfile: Dockerfile
