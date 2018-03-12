@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaymentInterfaces\PaymentInterfaces.csproj" />
     <ProjectReference Include="..\PaymentModels\PaymentModels.csproj" />
   </ItemGroup>
 

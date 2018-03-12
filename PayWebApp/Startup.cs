@@ -11,6 +11,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using PaymentBLL.Providers;
 using PaymentBLL;
+using PaymentModels;
+using PaymentInterfaces;
 
 namespace PayWebApp
 {
@@ -34,7 +36,9 @@ namespace PayWebApp
             // Add framework services.
             services.AddMvc();
 
-            services.AddTransient<IPayService, FakePayService>();
+            services.AddTransient<IPaymentOperations<TransactionResult>, FakePayService>();
+            services.AddTransient<IAuthPayment, FakePayService>();
+            services.AddTransient<ICardsMng<BaseCardModel, BaseResult>, FakePayService>();
 
             services.AddSwaggerGen(options =>
             {

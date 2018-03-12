@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PaymentInterfaces;
+using PaymentModels;
 using PayWebApp.Models;
-using PaymentBLL;
-using PaymentBLL.Models;
 
 //  Summary:
 //  По требованию одного из заказчиков необходимо реализовать возможность взимать плату у клиентов за определенные услуги.
@@ -32,33 +32,13 @@ namespace PayWebApp.Controllers
     [Route("api/[controller]")]
     public class PaymentController : Controller
     {
-        private readonly IPayService _payService;
+        private readonly IPaymentOperations<TransactionResult> _payService;
 
-        public PaymentController(IPayService payService)
+        public PaymentController(IPaymentOperations<TransactionResult> payService)
         {
             _payService = payService;
         }
-
-        /// <summary>
-        /// User must have account on exernal payment service
-        /// He will get token/nonce for auth payment requests
-        /// </summary>
-        /// <param name="customerId">customer id (or login) - from payment service</param>
-        /// <returns>token/nonce</returns>
-        [HttpGet("token/{customerId}")]
-        public async Task<IActionResult> GetToken(string customerId)
-        {
-            var result = await _payService.GetTokenAsync(customerId);
-            if (result.IsSuccess)
-            {
-                return Ok(new { token = result.Token });
-            }
-            else
-            {
-                return StatusCode(400, result.Message);
-            }
-        }
-
+        
         /// POST api/payments/hold/
         /// <summary>
         /// create transaction
@@ -71,7 +51,7 @@ namespace PayWebApp.Controllers
             if (!req.IsValid())
                 return StatusCode(400, new { error_message = "Model is not valid" });
 
-            var result = await _payService.HoldAsync(req.UserKey, req.Amount);
+            var result = await _payService.HoldAsync(req.Amount);
             if (result.IsSuccess)
             {
                 return Ok(new { transaction_id = result.TransactionId });
@@ -94,15 +74,7 @@ namespace PayWebApp.Controllers
             if (!req.IsValid())
                 return StatusCode(400, new { error_message = "Model is not valid" });
 
-            BaseResultModel result;
-            if (!String.IsNullOrEmpty(req.TransactionID))
-            {
-                result = await _payService.ChargeAsync(req.UserKey, req.TransactionID);
-            }
-            else
-            {
-                result = await _payService.ChargeAsync(req.UserKey, req.Amount);
-            }
+            BaseResult result = await _payService.ChargeAsync(req.Amount, req.TransactionID);
             
             if (result.IsSuccess)
             {
@@ -126,7 +98,7 @@ namespace PayWebApp.Controllers
             if (!req.IsValid())
                 return StatusCode(400, new { error_message = "Model is not valid" });
 
-            var result = await _payService.RefundAsync(req.UserKey, req.TransactionID, req.Amount);
+            var result = await _payService.RefundAsync(req.Amount, req.TransactionID);
             if (result.IsSuccess)
             {
                 return Ok();

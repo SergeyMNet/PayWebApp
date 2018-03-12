@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentBLL.Models
+namespace PaymentModels
 {
-    public class BaseResultModel
+    public class BaseResult
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; }

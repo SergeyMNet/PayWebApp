@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PaymentBLL.Models
+namespace PaymentModels
 {
-    public class TokenResult : BaseResultModel
+    public class TokenResult : BaseResult
     {
         public string Token { get; set; }
     }
